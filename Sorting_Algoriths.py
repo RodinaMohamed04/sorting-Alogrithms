@@ -103,6 +103,46 @@ def quick_sort(arr, low, high):
         quick_sort(arr, pi + 1, high)
 
 
+
+#merge sort
+
+def merge(arr, l, m, r):
+    left = arr[l:m+1]
+    right = arr[m+1:r+1]
+
+    i = 0
+    j = 0
+    k = l
+
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            arr[k] = left[i]
+            i += 1
+        else:
+            arr[k] = right[j]
+            j += 1
+        k += 1
+
+    while i < len(left):
+        arr[k] = left[i]
+        i += 1
+        k += 1
+
+    while j < len(right):
+        arr[k] = right[j]
+        j += 1
+        k += 1
+
+
+def merge_sort(arr, l, r):
+    if l < r:
+        m = (l + r) // 2
+
+        merge_sort(arr, l, m)
+        merge_sort(arr, m + 1, r)
+
+        merge(arr, l, m, r)
+
 for size in sizes:
     arr = generated_array(size)
     arr1 = arr.copy()
@@ -140,6 +180,12 @@ for size in sizes:
     end = time.time()
     quick_sort_time = (end - start) * 1000
 
+    # merge sort
+    start = time.time()
+    merge_sort(arr6, 0, size - 1)
+    end = time.time()
+    merge_sort_time = (end - start) * 1000
+
 
     print("Array size :",size)
     print("bubble sort time:",bubble_sort_time,"ms")
@@ -147,6 +193,7 @@ for size in sizes:
     print("insertion sort time:", insertion_sort_time, "ms")
     print("Heap sort time:", heap_sort_time, "ms")
     print("Quick sort time:", quick_sort_time, "ms")
+    print("Merge sort time:", merge_sort_time, "ms")
     print()
 
 
