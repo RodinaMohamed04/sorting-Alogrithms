@@ -73,12 +73,43 @@ def heap_sort(arr,n):
         Max_heap(arr,n,0)
 
 
+
+#quick sort (random pivot)
+
+def partition(arr, low, high):
+    pivot = arr[high]
+    i = low - 1
+
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    return i+1
+
+
+def randomized_partition(arr, low, high):
+    rand_index = random.randint(low, high)
+    arr[rand_index], arr[high] = arr[high], arr[rand_index]
+    return partition(arr, low, high)
+
+
+def quick_sort(arr, low, high):
+    if low < high:
+        pi = randomized_partition(arr, low, high)
+
+        quick_sort(arr, low, pi - 1)
+        quick_sort(arr, pi + 1, high)
+
+
 for size in sizes:
     arr = generated_array(size)
     arr1 = arr.copy()
     arr2 = arr.copy()
     arr3 = arr.copy()
     arr4 = arr.copy()
+    arr5 = arr.copy()
 
     start = time.time()
     bubble_sort(arr1)
@@ -102,6 +133,11 @@ for size in sizes:
     end = time.time()
     heap_sort_time = (end - start) * 1000
 
+    # quick sort
+    start = time.time()
+    quick_sort(arr5, 0, size - 1)
+    end = time.time()
+    quick_sort_time = (end - start) * 1000
 
 
     print("Array size :",size)
@@ -109,6 +145,7 @@ for size in sizes:
     print("selection sort time:", selection_sort_time, "ms")
     print("insertion sort time:", insertion_sort_time, "ms")
     print("Heap sort time:", heap_sort_time, "ms")
+    print("Quick sort time:", quick_sort_time, "ms")
     print()
 
 
