@@ -65,12 +65,12 @@ def Max_heap (arr,n,i):
         Max_heap(arr,n,largest)
 def heap_sort(arr,n):
     ##build max heap // O(n)
-    for i in range(n//2,-1,-1):
+    for i in range(n//2 -1 ,-1,-1):
         Max_heap(arr,n,i)
     ##deletion // O(n log n)
     for i in range(n-1,0,-1):
         arr[i],arr[0] = arr[0],arr[i]
-        Max_heap(arr,n,0)
+        Max_heap(arr,i,0)
 
 
 
@@ -105,7 +105,6 @@ def quick_sort(arr, low, high):
 
 
 #merge sort
-
 def merge(arr, l, m, r):
     left = arr[l:m+1]
     right = arr[m+1:r+1]
@@ -123,16 +122,15 @@ def merge(arr, l, m, r):
             j += 1
         k += 1
 
+    while j < len(right):
+         arr[k] = right[j]
+         j += 1
+         k += 1
+
     while i < len(left):
         arr[k] = left[i]
         i += 1
         k += 1
-
-    while j < len(right):
-        arr[k] = right[j]
-        j += 1
-        k += 1
-
 
 def merge_sort(arr, l, r):
     if l < r:
@@ -168,7 +166,6 @@ for size in sizes:
     end = time.time()
     insertion_sort_time = (end - start) * 1000
 
-### assignment two
     start = time.time()
     heap_sort(arr4,size)
     end = time.time()
@@ -186,11 +183,12 @@ for size in sizes:
     end = time.time()
     merge_sort_time = (end - start) * 1000
 
-
-    print("Array size :",size)
+    print("Array size :", size)
+    print("O(n^2)")
     print("bubble sort time:",bubble_sort_time,"ms")
     print("selection sort time:", selection_sort_time, "ms")
     print("insertion sort time:", insertion_sort_time, "ms")
+    print("O(n log n)")
     print("Heap sort time:", heap_sort_time, "ms")
     print("Quick sort time:", quick_sort_time, "ms")
     print("Merge sort time:", merge_sort_time, "ms")
