@@ -49,7 +49,7 @@ def insertion_sort(arr):
         arr[j + 1] = temp
 
 ##### Assignment two
-
+## PART ONE:
 #heap sort
 def Max_heap (arr,n,i):
     largest = i
@@ -72,10 +72,7 @@ def heap_sort(arr,n):
         arr[i],arr[0] = arr[0],arr[i]
         Max_heap(arr,i,0)
 
-
-
 #quick sort (random pivot)
-
 def partition(arr, low, high):
     pivot = arr[high]
     i = low - 1
@@ -88,13 +85,10 @@ def partition(arr, low, high):
     arr[i+1], arr[high] = arr[high], arr[i+1]
     return i+1
 
-
 def randomized_partition(arr, low, high):
     rand_index = random.randint(low, high)
     arr[rand_index], arr[high] = arr[high], arr[rand_index]
     return partition(arr, low, high)
-
-
 
 def quick_sort(arr, low, high):
     if low < high:
@@ -102,8 +96,6 @@ def quick_sort(arr, low, high):
 
         quick_sort(arr, low, pi - 1)
         quick_sort(arr, pi + 1, high)
-
-
 
 #merge sort
 def merge(arr, l, m, r):
@@ -141,6 +133,33 @@ def merge_sort(arr, l, r):
         merge_sort(arr, m + 1, r)
 
         merge(arr, l, m, r)
+
+##PART TWO:
+##FIRST: HYBRID MERGE SELECTION SORT ALGORITHM
+
+def hybrid_merge_selection(arr, left , right , threshold):
+    if right - left +1 <= threshold:
+        sub_array = arr[left:right+1]
+        selection_sort(sub_array)
+        arr[left:right+1] = sub_array
+        return
+
+    if left < right:
+        median = (left + right) // 2
+        hybrid_merge_selection(arr, left , median , threshold)
+        hybrid_merge_selection(arr, median+1 , right , threshold)
+        merge(arr, left, median, right)
+
+array = [23, 25, 4, 7, 11, 48, 3, 10, 43]
+threshold = 5
+print("Hybrid Merge and Selection Sort")
+arr_hybrid = array.copy()
+print(f"Before:", arr_hybrid)
+hybrid_merge_selection(arr_hybrid, 0, len(arr_hybrid) - 1, threshold)
+print(f"After:", arr_hybrid)
+
+##SECOND: KTH SMALLEST ELEMENT IN UNSORTED ARRAY
+
 
 for size in sizes:
     arr = generated_array(size)
@@ -184,16 +203,17 @@ for size in sizes:
     end = time.time()
     merge_sort_time = (end - start) * 1000
 
+##PART ONE
     print("Array size :", size)
     print("O(n^2)")
     print("bubble sort time:",bubble_sort_time,"ms")
     print("selection sort time:", selection_sort_time, "ms")
     print("insertion sort time:", insertion_sort_time, "ms")
+##PART ONE ASSIGNMENT  TWO
     print("O(n log n)")
     print("Heap sort time:", heap_sort_time, "ms")
     print("Quick sort time:", quick_sort_time, "ms")
     print("Merge sort time:", merge_sort_time, "ms")
     print()
-
 
 
