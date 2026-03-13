@@ -110,6 +110,7 @@ for size in sizes:
     arr3 = arr.copy()
     arr4 = arr.copy()
     arr5 = arr.copy()
+    arr6 = arr.copy()
 
     start = time.time()
     bubble_sort(arr1)
