@@ -95,6 +95,7 @@ def randomized_partition(arr, low, high):
     return partition(arr, low, high)
 
 
+
 def quick_sort(arr, low, high):
     if low < high:
         pi = randomized_partition(arr, low, high)
