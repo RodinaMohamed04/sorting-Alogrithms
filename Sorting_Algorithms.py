@@ -159,6 +159,18 @@ hybrid_merge_selection(arr_hybrid, 0, len(arr_hybrid) - 1, threshold)
 print(f"After:", arr_hybrid)
 
 ##SECOND: KTH SMALLEST ELEMENT IN UNSORTED ARRAY
+def kth_smallest(arr, low, high, k):
+    if low <= high:
+        pi = randomized_partition(arr, low, high)
+
+        if pi == k:
+            return arr[pi]
+
+        elif pi > k:
+            return kth_smallest(arr, low, pi - 1, k)
+
+        else:
+            return kth_smallest(arr, pi + 1, high, k)
 
 
 for size in sizes:
@@ -215,5 +227,9 @@ for size in sizes:
     print("Quick sort time:", quick_sort_time, "ms")
     print("Merge sort time:", merge_sort_time, "ms")
     print()
+test_arr = [7, 10, 4, 3, 20, 15]
+k = 0
+result = kth_smallest(test_arr.copy(), 0, len(test_arr) - 1, k)
+print("Kth smallest element =", result)
 
 
